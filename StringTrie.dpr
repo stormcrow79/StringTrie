@@ -109,16 +109,23 @@ Begin
     Else If iLen > 0 Then
     Begin
       // split
-      oNode := TTrieNode.Create;
-
       If iLen < Length(FChildren[iLoop].Value) Then
       Begin
-        oNode.Value := Copy(sValue, 1, iLen);
-        oNode.Terminal := False;
-        oNode.Add(Copy(FChildren[iLoop].Value, iLen + 1, MaxInt), FChildren[iLoop].Data);
+        // create a new parent node with the prefix
+        oNode := TTrieNode.Create;
+        oNode.Value := Copy(FChildren[iLoop].Value, 1, iLen);
+
+        // update the old child to the suffix
+        FChildren[iLoop].Value := Copy(FChildren[iLoop].Value, iLen + 1, MaxInt);
+
+        // move the old subtree to the new child
+        SetLength(oNode.FChildren, 4);
+        oNode.FChildren[0] := FChildren[iLoop];
+        oNode.FCount := 1;
+        FChildren[iLoop] := oNode;
       End;
-      oNode.Add(Copy(sValue, iLen + 1, MaxInt), pData);
-      FChildren[iLoop] := oNode;
+      // Add the new key
+      FChildren[iLoop].Add(Copy(sValue, iLen + 1, MaxInt), pData);
       Exit;
     End
     Else If StrComp(PChar(sValue), PChar(FChildren[iLoop].Value)) <= 0 Then
