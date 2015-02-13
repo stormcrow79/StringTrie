@@ -4,10 +4,10 @@ Program StringTrie;
 
 Uses
   FastMemoryManager, FastMemoryManagerMessages,
-  SysUtils, Windows, Math;
+  SysUtils, Windows, Math, Classes;
 
 
-Type               
+Type
   TTrieNode = Class
   Private
     FCount : Integer;
@@ -25,11 +25,13 @@ Type
   Public
     Destructor Destroy; Override;
 
-    Procedure Add(Const sValue : String; pData : Pointer);
+    Procedure Add(Const sValue : String; pData : Pointer); Overload;
+    Procedure Add(Const sValue : String; iValue : Integer); Overload;
     Function TryFind(pValue : PChar; Out pData : Pointer) : Boolean;
     Function Find(pValue : PChar) : Pointer;
 
     Procedure Dump(iDepth : Integer = 0);
+    Procedure DumpKeys(sValue : String = '');
 
     Property Value : String Read FValue Write FValue;
     Property Data : Pointer Read FData Write FData;
@@ -91,6 +93,7 @@ Begin
   Inherited;
 End;
 
+
 Procedure TTrieNode.Add(Const sValue : String; pData : Pointer);
 Var
   oNode : TTrieNode;
@@ -103,7 +106,13 @@ Begin
     iLen := PrefixLength(sValue, FChildren[iLoop].Value);
     If iLen = Length(FChildren[iLoop].Value) Then
     Begin
-      FChildren[iLoop].Add(Copy(sValue, iLen + 1, MaxInt), pData);
+      If iLen = Length(sValue) Then
+      Begin
+        FChildren[iLoop].Terminal := True;
+        FChildren[iLoop].Data := pData;
+      End
+      Else
+        FChildren[iLoop].Add(Copy(sValue, iLen + 1, MaxInt), pData);
       Exit;
     End
     Else If iLen > 0 Then
@@ -133,7 +142,7 @@ Begin
       // insert
       Break;
     End;
-    Inc(iLoop);                                                  
+    Inc(iLoop);
   End;
 
   Insert(iLoop);
@@ -142,6 +151,12 @@ Begin
   FChildren[iLoop].Data := pData;
   FChildren[iLoop].Terminal := True;
   Inc(FCount);
+End;
+
+
+Procedure TTrieNode.Add(Const sValue : String; iValue : Integer);
+Begin
+  Add(sValue, Pointer(iValue));
 End;
 
 
@@ -202,59 +217,70 @@ Begin
   End;
 End;
 
+
+Procedure TTrieNode.DumpKeys(sValue : String);
 Var
-  oRoot, oNode : TTrieNode;
-  pData : Pointer;
-
+  iIndex : Integer;
 Begin
-  oRoot := TTrieNode.Create;
+  If FTerminal Then
+    Writeln(sValue + FValue);
+  For iIndex := 0 To FCount - 1 Do
+    FChildren[iIndex].DumpKeys(sValue + FValue);
+End;
+
+
+Var
+  oList : TStringList;
+  oTrie : TTrieNode;
+  pData : Pointer;
+  iIndex, iJ : Integer;
+Begin
+  Randomize;
+
+  oTrie := TTrieNode.Create;
   Try
-{
-    oRoot.Add('TFoo', Pointer($1));
-    oRoot.Add('TBar', Pointer($3));
-    oRoot.Add('TFooList', Pointer($2));
-    oRoot.Add('C', Pointer($2));
-    oRoot.Add('BA', Pointer($4));
-    oRoot.Add('A', Pointer($5));
-    oRoot.Add('F', Pointer($6));
-    oRoot.Add('Baz', Pointer($7));
-
-    Writeln(oRoot.Count);
-
-    oNode := oRoot[0];
-
-    Writeln(oRoot.TryFind('T', pData) = False);
-    Writeln(oRoot.TryFind('TF', pData) = False);
-    Writeln(oRoot.TryFind('TFoo', pData) = True);
-    Writeln(oRoot.TryFind('BAZ', pData) = False);
-    Writeln(oRoot.TryFind('Baz', pData) = True);
-    Writeln(oRoot.TryFind('TFooList', pData) = True);
-    Writeln(oRoot.TryFind('TFooL', pData) = False);
-    Writeln(oRoot.TryFind('Z', pData) = False);
-    Writeln(oRoot.TryFind('', pData) = False);
-}
-
-//    oRoot.Add('EAbstractContract', Pointer($1));
-//    oRoot.Add('EAbstractError', Pointer($1));
-//    oRoot.Add('EAccessViolation', Pointer($1));
-    oRoot.Add('EAdvAbstract', Pointer($1));
-    oRoot.Add('EAdvAssertion', Pointer($1));
-    oRoot.Add('EAdvException', Pointer($1));
-{    oRoot.Add('EAdvFactory', Pointer($1));
-    oRoot.Add('EAdvInvariant', Pointer($1));
-    oRoot.Add('EAdvManager', Pointer($1));
-    oRoot.Add('EAdvReadWriteCriticalSection', Pointer($1));
-    oRoot.Add('EApplicationServerTask', Pointer($1));
-    oRoot.Add('EApplicationStorageInsert', Pointer($1));
-    oRoot.Add('EApplicationStorageUpdate', Pointer($1));
-}
-    Writeln;
-    oRoot.Dump;
-
+    oTrie.Add('A', 1);
+    oTrie.Add('A', 2);
   Finally
-    oRoot.Free;
+    oTrie.Free;
   End;
 
-  Readln;
+  oList := TStringList.Create;
+  Try
+    oList.LoadFromFile('c:\development\compile\hash.txt');
 
+    While True Do
+    Begin
+      oTrie := TTrieNode.Create;
+      Try
+        For iIndex := oList.Count - 1 DownTo 1 Do
+        Begin
+          iJ := Random(iIndex);
+          oList.Exchange(iIndex, iJ);
+        End;
+
+        For iIndex := 0 To oList.Count - 1 Do
+        Begin
+          oTrie.Add(oList[iIndex], Pointer($1));
+          If oTrie.Count <> (iIndex + 1) Then
+          Begin
+            Writeln(iIndex);
+          End;
+        End;
+
+        Write('.');
+      Finally
+        oTrie.Free;
+      End;
+    End;
+
+    {Writeln;
+    oTrie.DumpKeys;
+    Writeln;
+    oTrie.Dump;
+
+    Readln;}
+  Finally
+    oList.Free;
+  End;
 End.

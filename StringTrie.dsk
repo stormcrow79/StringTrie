@@ -51,22 +51,20 @@ BottomPanelData=0000040000000000F50400000000000002120100000000000001000000007A02
 
 [View0]
 Module=C:\Development\Tools\StringTrie\StringTrie.dpr
-CursorX=1
-CursorY=211
-TopLine=171
+CursorX=90
+CursorY=263
+TopLine=243
 LeftCol=1
 
 [Watches]
-Count=5
-Watch0='oNode',256,0,18,1,1
-Watch1='pValue',256,0,18,1,1
+Count=3
+Watch0='sValue',256,0,18,1,1
+Watch1='iLoop',256,0,18,1,1
 Watch2='iLen',256,0,18,1,1
-Watch3='Self',256,0,18,1,1
-Watch4='Result',256,0,18,1,1
 
 [Breakpoints]
 Count=1
-Breakpoint0='C:\Development\Tools\StringTrie\StringTrie.dpr',215,'',0,1,'',1,0,0,'',1,'','',''
+Breakpoint0='C:\Development\Tools\StringTrie\StringTrie.dpr',236,'',0,1,'',1,0,0,'',1,'','',''
 
 [AddressBreakpoints]
 Count=0
@@ -76,7 +74,7 @@ Create=1
 Visible=1
 State=0
 Left=1277
-Top=0
+Top=1
 Width=1283
 Height=67
 MaxLeft=-1
