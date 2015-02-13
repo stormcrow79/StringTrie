@@ -133,8 +133,16 @@ Begin
         oNode.FCount := 1;
         FChildren[iLoop] := oNode;
       End;
+
       // Add the new key
-      FChildren[iLoop].Add(Copy(sValue, iLen + 1, MaxInt), pData);
+      If iLen = Length(sValue) Then
+      Begin
+        FChildren[iLoop].Terminal := True;
+        FChildren[iLoop].Data := pData;
+      End
+      Else
+        FChildren[iLoop].Add(Copy(sValue, iLen + 1, MaxInt), pData);
+
       Exit;
     End
     Else If StrComp(PChar(sValue), PChar(FChildren[iLoop].Value)) <= 0 Then
@@ -231,7 +239,7 @@ End;
 
 Var
   oList : TStringList;
-  oTrie : TTrieNode;
+  oTrie, oChild : TTrieNode;
   pData : Pointer;
   iIndex, iJ : Integer;
 Begin
@@ -239,8 +247,18 @@ Begin
 
   oTrie := TTrieNode.Create;
   Try
-    oTrie.Add('A', 1);
-    oTrie.Add('A', 2);
+    oTrie.Add('TRDLUpgradeInputComment', 1);
+    oTrie.Add('TRDLUpgradeInputCommentsIterator', 1);
+    oTrie.Add('TRDLUpgradeInputComments', 1);
+    oTrie.Add('TRDLUpgradeInputComment', 1);
+    oTrie.Add('TRDLUpgradeInputComments', 1);
+
+    oTrie.DumpKeys;
+    Writeln;
+    Writeln(oTrie.Count);
+
+    oChild := oTrie[0];
+
   Finally
     oTrie.Free;
   End;
