@@ -187,10 +187,17 @@ Begin
     Begin
       oNode := FChildren[iIndex];
       iLen := Length(oNode.Value);
+	  // TODO: StrLComp is slow compared to optimised memory comparison
       If StrLComp(pValue, PChar(oNode.Value), iLen) = 0 Then
       Begin
         Inc(pValue, iLen);
-        Result := oNode.TryFind(pValue, pData);
+        If (pValue^ = #0) And oNode.Terminal Then
+        Begin
+          Result := True;
+          pData := oNode.Data
+        End
+        Else
+          Result := oNode.TryFind(pValue, pData);
       End;
 
       Inc(iIndex);
@@ -220,7 +227,10 @@ Begin
 
   For iLoop := 0 To FCount - 1 Do
   Begin
-    Writeln(sPrefix, FChildren[iLoop].Value, ' - ', Cardinal(FChildren[iLoop].Data));
+    Write(sPrefix, FChildren[iLoop].Value);
+    If FChildren[iLoop].Terminal Then
+      Write(' - ', Cardinal(FChildren[iLoop].Data));
+    Writeln;
     FChildren[iLoop].Dump(iDepth + 1);
   End;
 End;

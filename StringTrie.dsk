@@ -1,14 +1,14 @@
 [Closed Files]
-File_0=SourceModule,'c:\test\v3.1.1\libraries\system\fast memory manager\fastmemorymanager.pas',0,1,10200,1,10231,0,0
-File_1=SourceModule,'c:\development\tools\SmtpClient\SmtpClientSchannel.pas',0,1,800,20,831,0,0
-File_2=SourceModule,'C:\Test\v3.1.1\Kestral\Products\Karisma\Units\Modules\WorkList\WorkListProviders.pas',0,1,2094,1,2135,0,0
-File_3=SourceModule,'C:\Test\v3.1.1\Kestral\Products\Karisma\Units\Modules\WorkList\WorkListConstraintEntities.pas',0,1,50,1,91,0,0
-File_4=SourceModule,'C:\Test\v3.1.1\Kestral\Products\Karisma\Units\Modules\WorkList\WorkListLiveControls.pas',0,1,891,74,915,0,0
-File_5=SourceModule,'C:\Test\v3.1.1\Libraries\Frameworks\AdvLibrary\Classes\Filers\AdvJsonFilers.pas',0,1,334,47,360,0,0
-File_6=SourceModule,'C:\Test\v3.1.1\Kestral\Products\Karisma\Units\Modules\WorkList\WorkListSystems.pas',0,1,1,67,69,0,0
-File_7=SourceModule,'C:\Test\v3.1.1\Kestral\Products\Karisma\Units\Modules\Request\RequestSystems.pas',0,1,1,1,1,0,0
-File_8=SourceModule,'C:\Test\v3.1.1\Kestral\Products\Karisma\Units\Modules\Report\ReportSystems.pas',0,1,1271,29,1310,0,0
-File_9=SourceModule,'C:\Test\v3.1.1\Kestral\Products\Karisma\Units\Modules\Medicare\MedicareOnlineConnections.pas',0,1,226,1,231,0,0
+File_0=SourceModule,'c:\program files (x86)\borland\delphi5\source\vcl\Classes.pas',0,1,3075,1,3080,0,0
+File_1=SourceModule,'c:\test\v3.1.1\libraries\system\fast memory manager\fastmemorymanager.pas',0,1,10200,1,10231,0,0
+File_2=SourceModule,'c:\development\tools\SmtpClient\SmtpClientSchannel.pas',0,1,800,20,831,0,0
+File_3=SourceModule,'C:\Test\v3.1.1\Kestral\Products\Karisma\Units\Modules\WorkList\WorkListProviders.pas',0,1,2094,1,2135,0,0
+File_4=SourceModule,'C:\Test\v3.1.1\Kestral\Products\Karisma\Units\Modules\WorkList\WorkListConstraintEntities.pas',0,1,50,1,91,0,0
+File_5=SourceModule,'C:\Test\v3.1.1\Kestral\Products\Karisma\Units\Modules\WorkList\WorkListLiveControls.pas',0,1,891,74,915,0,0
+File_6=SourceModule,'C:\Test\v3.1.1\Libraries\Frameworks\AdvLibrary\Classes\Filers\AdvJsonFilers.pas',0,1,334,47,360,0,0
+File_7=SourceModule,'C:\Test\v3.1.1\Kestral\Products\Karisma\Units\Modules\WorkList\WorkListSystems.pas',0,1,1,67,69,0,0
+File_8=SourceModule,'C:\Test\v3.1.1\Kestral\Products\Karisma\Units\Modules\Request\RequestSystems.pas',0,1,1,1,1,0,0
+File_9=SourceModule,'C:\Test\v3.1.1\Kestral\Products\Karisma\Units\Modules\Report\ReportSystems.pas',0,1,1271,29,1310,0,0
 
 [Modules]
 Module0=C:\Development\Tools\StringTrie\StringTrie.dpr
@@ -51,9 +51,9 @@ BottomPanelData=0000040000000000F50400000000000002120100000000000001000000007A02
 
 [View0]
 Module=C:\Development\Tools\StringTrie\StringTrie.dpr
-CursorX=90
-CursorY=263
-TopLine=243
+CursorX=82
+CursorY=110
+TopLine=97
 LeftCol=1
 
 [Watches]
@@ -63,8 +63,11 @@ Watch1='iLoop',256,0,18,1,1
 Watch2='iLen',256,0,18,1,1
 
 [Breakpoints]
-Count=1
-Breakpoint0='C:\Development\Tools\StringTrie\StringTrie.dpr',236,'',0,1,'',1,0,0,'',1,'','',''
+Count=4
+Breakpoint0='C:\Development\Tools\StringTrie\StringTrie.dpr',295,'',0,1,'',1,0,0,'',1,'','',''
+Breakpoint1='C:\Development\Tools\StringTrie\StringTrie.dpr',285,'',0,1,'',1,0,0,'',1,'','',''
+Breakpoint2='C:\Development\Tools\StringTrie\StringTrie.dpr',252,'',0,1,'',1,0,0,'',1,'','',''
+Breakpoint3='C:\Development\Tools\StringTrie\StringTrie.dpr',109,'',0,1,'',1,0,0,'',1,'','',''
 
 [AddressBreakpoints]
 Count=0
