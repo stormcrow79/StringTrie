@@ -1,5 +1,5 @@
 Unit Hashtables;
-{}
+
 Interface
 
 Uses
